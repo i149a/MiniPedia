@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema(
         password: { type: String, required: true },
         picture: { type: String },
         isAdmin: {type: Boolean},
-        post: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
-        tag: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }]
+        posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+        tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }]
     },
     { timestamps: true } // For "createdAt" & "updatedAt" fields whenever there is an update 
 )
