@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.14.3",
+    "morgan": "^1.10.0"
+  },
+  "name": "minipedia",
+  "version": "1.0.0",
+  "description": "## 📌 Summary MiniPedia is a collaborative online encyclopedia that allows registered users to create, edit, and tag posts. The platform supports community-driven contributions with optional collaborative editing and user profile management. Designed with an intuitive interface, MiniPedia provides a space for structured, accessible knowledge-sharing.",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
