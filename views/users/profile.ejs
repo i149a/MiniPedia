@@ -1,0 +1,24 @@
+<%- include('../partials/header.ejs') %>
+
+    <h2><%= user.username %>'s Profile</h2>
+    <img src="<%= user.picture %>" alt="Profile Picture" width="150" />
+
+    <div>
+        <a href=<%= `/auth/${user._id}/update-password` %>>Update Password</a>
+    </div>
+
+    <h3>Posts:</h3>
+    <ul>
+        <% user.posts.forEach(post => { %>
+            <li><a href="/posts/<%= post._id %>"><%= post.title %></a></li>
+        <% }) %>
+    </ul>
+    
+    <h3>Tags:</h3>
+    <ul>
+        <% user.tags.forEach(tag => { %>
+            <li><a href="/tags/<%= tag._id %>"><%= tag.title %></a></li>
+        <% }) %>
+    </ul>
+
+<%- include('../partials/footer.ejs') %>
