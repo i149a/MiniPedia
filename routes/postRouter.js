@@ -7,7 +7,7 @@ const Post = require('../models/Post.js') // Import post router
 router.post('/', postController.createPost)
 
 // GET method for getting all posts (router, imported controller.function)
-router.get('/', postController.getAllPost)
+router.get('/', postController.getAllPosts)
 
 // Rendering new post page
 router.get('/new', (req, res) => {
