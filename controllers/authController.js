@@ -24,7 +24,7 @@ const registerUser = async (req, res) => {
             password: hashedPassword,
             username: req.body.username,
             picture: req.body.picture,
-            isAdmin: req.body.isAdmin, // ASK ABOUT THIS 
+            isAdmin: req.body.isAdmin,
             posts: [],
             tags: []
         })
