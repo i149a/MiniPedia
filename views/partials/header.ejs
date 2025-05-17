@@ -49,11 +49,11 @@
             <div class="nav-container">
                 <a href="/" class="logo">MiniPedia</a>
                 <div class="nav-links">
-                    <a href="/">Home</a>
-                    <a href="/posts/all">All Posts</a>
-                    <a href="/tags/all">All Tags</a>
 
                     <% if (user) { %>
+                        <a href="/">Home</a>
+                        <a href="/posts/all">All Posts</a>
+                        <a href="/tags/all">All Tags</a>
                         <a href="/posts/new">Create New Post</a>
                         <a href="/tags/new">Create New Tag</a>
                         <a href="/users/<%= user._id %>">Profile</a>
