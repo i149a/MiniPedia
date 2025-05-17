@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MiniPedia</title>
+        <link rel="stylesheet" href="/style.css" />
+        <style>
+            nav {
+                background-color: #f8f9fa;
+                padding: 1rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                margin-bottom: 2rem;
+            }
+            nav a {
+                margin-right: 1rem;
+                text-decoration: none;
+                color: #333;
+                font-weight: 500;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+            }
+            nav a:hover {
+                background-color: #e9ecef;
+                color: #007bff;
+            }
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .nav-links {
+                display: flex;
+                gap: 1rem;
+            }
+            .logo {
+                font-weight: bold;
+                font-size: 1.5rem;
+                color: #007bff;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav>
+            <div class="nav-container">
+                <a href="/" class="logo">MiniPedia</a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/posts/all">All Posts</a>
+                    <a href="/tags/all">All Tags</a>
+
+                    <% if (user) { %>
+                        <a href="/posts/new">Create New Post</a>
+                        <a href="/tags/new">Create New Tag</a>
+                        <a href="/users/<%= user._id %>">Profile</a>
+                        <a href="/auth/sign-out">Sign Out</a>
+                    <% } else { %>
+                        <a href="/auth/sign-in">Sign In</a>
+                        <a href="/auth/sign-up">Sign Up</a>
+                    <% } %>
+                </div>
+            </div>
+        </nav>
+        <main>

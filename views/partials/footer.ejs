@@ -1,6 +1,26 @@
         </main>
-            <footer>
-                <p>&copy; <%= new Date().getFullYear() %> MiniPedia </p>
-            </footer>
+        <footer>
+            <div class="footer-container">
+                <p>&copy; <%= new Date().getFullYear() %> <span class="logo">MiniPedia</span></p>
+            </div>
+        </footer>
+
+        <style>
+            footer {
+                background-color: #f8f9fa;
+                padding: 1.5rem;
+                box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+                margin-top: 2rem;
+                text-align: center;
+            }
+            .footer-container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .logo {
+                font-weight: bold;
+                color: #007bff;
+            }
+        </style>
     </body>
 </html>
