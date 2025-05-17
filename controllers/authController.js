@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
         // Sending a respnse to verify that the user is created
         res.render('./auth/thanks.ejs', { user })
     } catch (error) {
-        console.error('An error has occurred registering a user!', error.message) // To handle registration error
+        console.error('An error has occurred registering a user!', error.message) // To handle the errors
     }
 }
 
