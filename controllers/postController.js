@@ -34,7 +34,7 @@ const getAllPosts = async (req, res) => {
     }
 }
 
-// Get a flower by ID function
+// Get a post by ID function
 const getPostById = async (req, res) => {
     try {
         // Query for a specific post ID
@@ -47,7 +47,7 @@ const getPostById = async (req, res) => {
     }
 }
 
-// Uodate a specific flower by ID
+// Uodate a specific post by ID
 const updatePostById = async (req, res) => {
     try {
         // Find and Update the post using the id from the params
@@ -61,7 +61,7 @@ const updatePostById = async (req, res) => {
     }
 }
 
-// Delete flower by ID
+// Delete post by ID
 const deletePostById = async (req, res) => {
     try {
         // Find and Delete the post using the id from the params
