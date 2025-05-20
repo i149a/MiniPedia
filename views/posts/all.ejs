@@ -1,0 +1,12 @@
+<%- include('../partials/header.ejs') %>
+
+<h2>All Posts</h2>
+<ul>
+    <% posts.forEach(post => { %>
+        <li>
+            <a href="/posts/<%= post._id %>"><%= post.title %></a>
+        </li>
+    <% }) %>
+</ul>
+
+<%- include('../partials/footer.ejs') %>

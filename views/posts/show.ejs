@@ -1,0 +1,33 @@
+<%- include('../partials/header.ejs') %>
+
+<h2><%= post.title %></h2>
+<% if (post.image) { %>
+    <img src="<%= post.image %>" alt="<%= post.title %>" width="300" />
+<% } %>
+<p><%= post.body %></p>
+
+<h3>Tags:</h3>
+<ul>
+    <% post.tags.forEach(tag => { %>
+    <li>
+        <a href="/tags/<%= tag._id %>"><%= tag.title %></a>
+        <% if (tag.description) { %>
+            - <%= tag.description %>
+        <% } %>
+    </li>
+    <% }); %>
+</ul>
+
+<p>Author: <a href="/users/<%= post.author._id %>"><%= post.author.username %></a></p>
+<% if (post.edited) { %>
+    <p>Last edited by: <%= post.editors[post.editors.length-1].username %></p>
+<% } %>
+
+<% if (currentUser && (currentUser._id.equals(post.author._id) || currentUser.isAdmin)) { %>
+    <a href="/posts/<%= post._id %>/edit">Edit</a>
+    <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+<% } %>
+
+<%- include('../partials/footer.ejs') %>
