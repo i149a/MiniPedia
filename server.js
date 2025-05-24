@@ -31,8 +31,10 @@ app.use((req, res, next) => {
     next()
 })
 
-// Please Add the links of Routers 
-
+app.use('/auth', authRouter) // This tells the app to navigate to auth router when "http://localhost:3000/auth" is called 
+app.use('/users', userRouter) // This tells the app to navigate to user router when "http://localhost:3000/users" is called 
+app.use('/posts', postRouter) // This tells the app to navigate to post router when "http://localhost:3000/posts" is called 
+app.use('/tags', tagRouter) // This tells the app to navigate to tag router when "http://localhost:3000/tags" is called 
 
 app.get('/', (req, res) => {
     res.render('index.ejs')
