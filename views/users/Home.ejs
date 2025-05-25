@@ -1,0 +1,18 @@
+<%- include('../partials/header.ejs') %>
+
+    <h2><%= user.username %>'s Posts</h2>
+
+
+    <ul>
+        <% user.posts.forEach(post => { %>
+            <li><a href="/posts/<%= post._id %>"><%= post.title %></a></li>
+        <% }) %>
+    </ul>
+    
+    <h2><%= user.username %>'s Tags</h2>
+    <ul>
+        <% user.tags.forEach(tag => { %>
+            <li><a href="/tags/<%= tag._id %>"><%= tag.title %></a></li>
+        <% }) %>
+    </ul>
+<%- include('../partials/footer.ejs') %>
