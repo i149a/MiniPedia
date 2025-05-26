@@ -2,9 +2,9 @@
 
 <h2>All Posts</h2>
 <ul>
-    <% posts.forEach(post => { %>
+    <% posts.forEach(posts => { %>
         <li>
-            <a href="/posts/<%= post._id %>"><%= post.title %></a>
+            <a href="/posts/<%= posts._id %>"><%= posts.title %></a>
         </li>
     <% }) %>
 </ul>
