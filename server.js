@@ -16,6 +16,8 @@ const db = require('./db') // To excute the connect function
 // After importing we must put them in use
 const app = express()
 
+app.set('view engine', 'ejs');
+
 app.use(logger('dev'))
 app.use(express.json()) // Parses incoming requests with JSON
 app.use(express.urlencoded({ extended: false })) // Parses URL-encoded data from forms
