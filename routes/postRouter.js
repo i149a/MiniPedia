@@ -3,12 +3,15 @@ const router = express.Router()
 const postController = require('../controllers/postController.js')
 const Post = require('../models/Post.js')
 const Tag = require('../models/Tag.js')
+const User = require('../models/User.js')
 
 // Create Post 
 router.post('/', postController.createPost)
 
+
+
 // Get All Posts 
-router.get('/', postController.getAllPosts)
+router.get('/all', postController.getAllPosts)
 
 // Rendering new post page
 router.get('/new', async (req, res) => {

@@ -2,25 +2,36 @@
 const User = require('../models/User.js')
 const Post = require('../models/Post.js')
 const Tag = require('../models/Tag.js')
+const session = require('express-session')
+const authController = require('../controllers/authController.js')
+const tagController = require('../controllers/tagController.js')
+const userController = require('../controllers/userController.js')
+
+
 
 
 // CREATE POST FUNCTION
 const createPost = async (req, res) => {
     try {
-        const { title, body, image, tags = [] } = req.body
-        const author = req.body.author // Current user's ID (Who is writing the post)
+
+        const currentUser = await User.findOne({email: req.session.user.email})
+        // const AllUserTags = await Tag.find()
+        const { title, body, image, tags = [] } = req.body// Current user's ID (Who is writing the post)
         
+        let def=image;
+        if(!def){def="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMmyTPv4M5fFPvYLrMzMQcPD_VO34ByNjouQ&s"}
+      
         // Create new post
         const post = await Post.create({
-            title,
-            body,
-            image, 
-            author,
-            tags
+        title: title,
+        body: body,
+        image: def,
+        author: currentUser,
+        tags: tags        
         })
 
         // Add post to author's posts array
-        await User.findByIdAndUpdate(author, {
+        await User.findByIdAndUpdate(currentUser, {
             $push: { posts: post._id } // $push adds to array
         })
 
@@ -49,7 +60,7 @@ const getAllPosts = async (req, res) => {
         // Render view with posts and current user data
         res.render('./posts/all.ejs', { 
             posts,
-            currentUser: req.user // Pass logged-in user data
+            currentUser: req.session.user // Pass logged-in user data
         })
     } catch (error) {
         console.error('Error getting posts:', error.message)
@@ -77,7 +88,7 @@ const getPostById = async (req, res) => {
         })
     } catch (error) {
         console.error('Error getting post:', error.message)
-        res.status(500).send('Error getting post')
+        res.status(500).send('Error getting post for specified ID')
     }
 }
 
