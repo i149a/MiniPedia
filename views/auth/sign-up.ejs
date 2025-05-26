@@ -2,19 +2,27 @@
     <h2>Sign Up</h2>
     <form action="/auth/sign-up" method="POST">
         <div class="input-group">
-            <input type="text" name="username" placeholder="Username" required />
+            <input type="text" name="username" placeholder="Username *" required />
         </div>
         <div class="input-group">
-            <input type="email" name="email" placeholder="Email" required />
+            <input type="email" name="email" placeholder="Email *" required />
         </div>
         <div class="input-group">
             <input type="text" name="picture" placeholder="Profile Picture URL" />
         </div>
         <div class="input-group">
-            <input type="password" name="password" placeholder="Password" required />
+            <div class="password-info">
+                <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" />
+                </svg>
+                <span>
+                    Password must be at least <strong>8 characters</strong> long and include <strong>uppercase</strong>, <strong>lowercase</strong> letters, and a <strong>number</strong>.
+                </span>
+            </div>
+            <input type="password" name="password" placeholder="Password *" required />
         </div>
         <div class="input-group">
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password *" required />
         </div>
         <button type="submit">Register</button>
         <div class="options">
@@ -22,3 +30,47 @@
         </div>
     </form>
 </div>
+
+<style>
+    /* Style for required field indicators */
+    input[required]::placeholder {
+        color: #999;
+    }
+    
+    input[required]::before {
+        content: "*";
+        color: #dc2626;
+        position: absolute;
+        right: 10px;
+    }
+    
+    .input-group {
+        position: relative;
+    }
+    
+    /* Password info box */
+    .password-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        background-color: #e0f3ff;
+        border-left: 4px solid #3399ff;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        color: #034a80;
+        margin-bottom: 8px;
+        border-radius: 4px;
+    }
+
+    .password-info strong {
+        font-weight: 600;
+    }
+
+    .info-icon {
+        flex-shrink: 0;
+        color: #3399ff;
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+    }
+</style>

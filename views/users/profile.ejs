@@ -1,24 +1,166 @@
 <%- include('../partials/header.ejs') %>
 
-    <h2><%= user.username %>'s Profile</h2>
-    <img src="<%= user.picture %>" alt="Profile Picture" width="150" />
+<div class="profile-container">
 
-    <div>
-        <a href=<%= `/auth/${user._id}/update-password` %>>Update Password</a>
+  <header class="profile-header">
+    <img src="<%= user.picture || '/images/default-profile.png' %>" alt="Profile Picture" class="profile-pic" />
+    <div class="profile-actions">
+      <h2><%= user.username %></h2>
+      <a href="/auth/<%= user._id %>/update-picture" class="btn btn-primary">Update Picture</a>
+      <a href="/auth/<%= user._id %>/update-password" class="btn btn-secondary">Update Password</a>
+    </div>
+  </header>
+
+  <section class="profile-lists">
+    <div class="posts-list">
+      <h3>Posts</h3>
+      <ul>
+        <% if(user.posts.length === 0) { %>
+          <li>No posts yet.</li>
+        <% } else { %>
+          <% user.posts.forEach(post => { %>
+            <li><a href="/posts/<%= post._id %>"><%= post.title %></a></li>
+          <% }) %>
+        <% } %>
+      </ul>
     </div>
 
-    <h3>Posts:</h3>
-    <ul>
-        <% user.posts.forEach(post => { %>
-            <li><a href="/posts/<%= post._id %>"><%= post.title %></a></li>
-        <% }) %>
-    </ul>
-    
-    <h3>Tags:</h3>
-    <ul>
-        <% user.tags.forEach(tag => { %>
+    <div class="tags-list">
+      <h3>Tags</h3>
+      <ul>
+        <% if(user.tags.length === 0) { %>
+          <li>No tags yet.</li>
+        <% } else { %>
+          <% user.tags.forEach(tag => { %>
             <li><a href="/tags/<%= tag._id %>"><%= tag.title %></a></li>
-        <% }) %>
-    </ul>
+          <% }) %>
+        <% } %>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<style>
+  .profile-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .profile-pic {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #3399ff;
+    box-shadow: 0 0 10px rgba(51,153,255,0.4);
+  }
+
+  .profile-actions h2 {
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+    color: #222;
+  }
+
+  .profile-actions .btn {
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 0.5rem 1.3rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: #3399ff;
+    color: white;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #1c6ed0;
+  }
+
+  .btn-secondary {
+    background-color: #666;
+    color: white;
+    border: none;
+  }
+
+  .btn-secondary:hover {
+    background-color: #444;
+  }
+
+  .profile-lists {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+  }
+
+  .posts-list, .tags-list {
+    flex: 1;
+  }
+
+  .posts-list h3, .tags-list h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #3399ff;
+    padding-bottom: 0.3rem;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  ul li {
+    margin-bottom: 0.7rem;
+    font-size: 1.1rem;
+  }
+
+  ul li a {
+    text-decoration: none;
+    color: #3399ff;
+    transition: color 0.3s ease;
+  }
+
+  ul li a:hover {
+    color: #1c6ed0;
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .profile-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .profile-actions {
+      text-align: center;
+    }
+
+    .profile-lists {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+</style>
 
 <%- include('../partials/footer.ejs') %>

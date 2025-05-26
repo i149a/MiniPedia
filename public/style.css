@@ -1,0 +1,155 @@
+/* Import modern font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #cce7f6;
+  color: #2b2b2b;
+}
+
+/* Ensure full height layout */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Center auth content and space for footer */
+.auth-container {
+  flex: 1;
+  padding: 4rem 1rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+/* Welcome message */
+.auth-container h1 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.auth-container p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* Form container */
+.form-container {
+  width: 100%;
+  max-width: 380px;
+  perspective: 1000px;
+  position: relative;
+}
+
+/* Form styles */
+.form {
+  background-color: #fff;
+  padding: 35px 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form.active {
+  z-index: 2;
+  opacity: 1;
+}
+
+.sign-in {
+  transform: rotateY(0deg);
+}
+
+.sign-up {
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+.sign-in.inactive {
+  transform: rotateY(-180deg);
+  opacity: 0;
+}
+
+.sign-up.active {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
+/* Input styles */
+.input-group {
+  margin-bottom: 16px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+/* Button styles */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #005ec4;
+}
+
+/* Footer fixed at bottom */
+.index-footer {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 13px;
+  color: #555;
+  border-top: 1px solid #ccc;
+  margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .form-container {
+    width: 90%;
+  }
+
+  .auth-container h1 {
+    font-size: 26px;
+  }
+
+  .auth-container p {
+    font-size: 14px;
+  }
+
+  .form {
+    padding: 30px 20px;
+  }
+}
