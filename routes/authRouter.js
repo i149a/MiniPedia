@@ -1,33 +1,70 @@
-const express = require('express') // Import Express
-const router = express.Router() // Set up the router object 
-const authController = require('../controllers/authController.js') // Import Auth Controllers
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController.js');
+const User = require('../models/User.js');
 
-// POST method for creating new user "sign-up" (router, imported controller.function)
-router.post('/sign-up', authController.registerUser)
+// POST routes
+router.post('/sign-up', authController.registerUser);
+router.post('/sign-in', authController.signInUser);
+router.get('/sign-out', authController.signOutUser);
+router.post('/:id/update-password', authController.updatePassword);
+router.post('/:id/update-picture', authController.updatePicture);
 
-// Post method for signing in "sign-in" (router, imported controller.function)
-router.post('/sign-in', authController.signInUser)
-
-// GET method for signing out "sign-out" (router, imported controller.function)
-router.get('/sign-out', authController.signOutUser)
-
-// PUT method for updating a specific user (router, imported controller.function)
-router.put('/:id', authController.updatePassword)
-
-// Rendering Sign up page 
+// GET Sign Up Route
 router.get('/sign-up', (req, res) => {
-    res.render('./auth/sign-up.ejs')
-})
+    res.render('auth/sign-up');
+});
 
-// Rendering Sign in page
+// GET Sign In Route
 router.get('/sign-in', (req, res) => {
-    res.render('./auth/sign-in.ejs')
-})
+    res.render('auth/sign-in');
+});
 
-// Rendering Update password page
-router.get('/:id/update-password', (req, res) => {
-  res.render('./auth/update-password.ejs')
-})
+// Update Password Route
+router.get('/:id/update-password', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).render('error', { 
+                message: 'User not found', 
+                error: { status: 404 } 
+            });
+        }
+        res.render('auth/update-password', { user, error: null });
+    } catch (error) {
+        res.status(500).render('error', { 
+            message: 'Server Error', 
+            error: { status: 500 } 
+        });
+    }
+});
 
-// Export the router
-module.exports = router
+// Update Picture Route
+router.get('/:id/update-picture', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).render('error', { 
+                message: 'User not found', 
+                error: { status: 404 } 
+            });
+        }
+        res.render('auth/update-picture', { user, error: null });
+    } catch (error) {
+        res.status(500).render('error', { 
+            message: 'Server Error', 
+            error: { status: 500 } 
+        });
+    }
+});
+
+// Forget Password Route
+router.get('/forget-password', (req, res) => {
+    res.render('auth/forget-password', {
+        error: null,
+        email: ''
+    });
+});
+router.post('/forget-password', authController.forgetPassword);
+
+module.exports = router;
