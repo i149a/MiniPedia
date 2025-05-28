@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const postController = require('../controllers/postController.js')
+const authController = require('../controllers/authController.js')
 const Post = require('../models/Post.js')
 const Tag = require('../models/Tag.js')
 const User = require('../models/User.js')
 
 // Create Post 
 router.post('/', postController.createPost)
-
 
 
 // Get All Posts 
@@ -36,12 +36,13 @@ router.get('/:id/edit', async (req, res) => {
   ])
   
   // Checks is the post can be edited or not
-  if (!post.editable)
-    return res.redirect('/posts')
-    
+
+  currentUser = req.session.user
   res.render('./posts/edit.ejs', { 
     post,
-    tags
+    tags,
+    currentUser
+
   })
 })
 

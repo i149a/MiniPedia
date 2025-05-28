@@ -28,6 +28,12 @@ const registerUser = async (req, res) => {
                 error: 'Passwords do not match'
             });
         }
+        let defaultP=req.body.picture
+        if (!defaultP){
+            defaultP="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_items_boosted&w=740"
+
+            
+        }
 
         const hashedPassword = bcrypt.hashSync(req.body.password, 12);
 
@@ -35,7 +41,7 @@ const registerUser = async (req, res) => {
             email: req.body.email,
             password: hashedPassword,
             username: req.body.username,
-            picture: req.body.picture || '',
+            picture: defaultP,
             isAdmin: false,
             posts: [],
             tags: []

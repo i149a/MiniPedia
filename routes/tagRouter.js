@@ -4,10 +4,10 @@ const tagController = require('../controllers/tagController.js') // Import tag c
 const Tag = require('../models/Tag.js') // Import tag router
 
 // POST method for creating a post for specific user (router, imported controller.function)
-router.post('/', tagController.createTag)
+router.post('/', tagController.createNew)
 
 // GET method for getting all tags (router, imported controller.function)
-router.get('/', tagController.getAllTags)
+router.get('/all', tagController.getAllTags)
 
 // Rendering new tag tag
 router.get('/new', (req, res) => {

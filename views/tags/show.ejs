@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+
+<h2><%= tag.title %></h2>
+<p><%= tag.description%></p>
+
+<p>Author: <a href="/users/<%= tag.author._id %>"><%= tag.author.username %></a></p>
+<% if (tag.edited) { %>
+    <p>Last edited by: <%= tag.editors[tag.editors.length-1].username %></p>
+<% } %>
+
+  <section class="profile-lists">
+    <div class="posts-list">
+      <h3>Posts</h3>
+      <ul>
+        <% if(tag.posts.length === 0) { %>
+          <li>No posts yet.</li>
+        <% } else { %>
+          <% tag.posts.forEach(post => { %>
+            <li><a href="/posts/<%= post._id %>"><%= post.title %></a></li>
+          <% }) %>
+        <% } %>
+      </ul>
+    </div>
+
+
+<%- include('../partials/footer.ejs') %>

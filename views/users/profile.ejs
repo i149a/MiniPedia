@@ -6,8 +6,10 @@
     <img src="<%= user.picture || '/images/default-profile.png' %>" alt="Profile Picture" class="profile-pic" />
     <div class="profile-actions">
       <h2><%= user.username %></h2>
+      <% if(sessionemail.email===user.email){ %>
       <a href="/auth/<%= user._id %>/update-picture" class="btn btn-primary">Update Picture</a>
       <a href="/auth/<%= user._id %>/update-password" class="btn btn-secondary">Update Password</a>
+      <% } %>
     </div>
   </header>
 
@@ -28,7 +30,7 @@
     <div class="tags-list">
       <h3>Tags</h3>
       <ul>
-        <% if(user.tags.length === 0) { %>
+        <% if(data.tags.length === 0) { %>
           <li>No tags yet.</li>
         <% } else { %>
           <% user.tags.forEach(tag => { %>
