@@ -1,0 +1,13 @@
+<%- include('../partials/header.ejs') %>
+
+<h2>Create New Tag</h2>
+
+<form action="/Tags" method="POST">
+    <input type="text" name="title" placeholder="Tag name" required />
+    <textarea name="description" placeholder="Tag description" required></textarea>
+
+    
+    <button type="submit">Create Tag</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>

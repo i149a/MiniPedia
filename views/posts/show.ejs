@@ -11,9 +11,7 @@
     <% post.tags.forEach(tag => { %>
     <li>
         <a href="/tags/<%= tag._id %>"><%= tag.title %></a>
-        <% if (tag.description) { %>
-            - <%= tag.description %>
-        <% } %>
+        
     </li>
     <% }); %>
 </ul>
@@ -23,10 +21,16 @@
     <p>Last edited by: <%= post.editors[post.editors.length-1].username %></p>
 <% } %>
 
-<% if (currentUser && (currentUser._id.equals(post.author._id) || currentUser.isAdmin)) { %>
-    <a href="/posts/<%= post._id %>/edit">Edit</a>
+
+<% if ( currentUser == postAuthor) { %>
     <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete</button>
+    </form>
+<% } %>
+
+<% if ( currentUser ) { %>
+    <form action="/posts/<%= post._id %>/edit" method="GET">
+        <button type="submit">Edit</button>
     </form>
 <% } %>
 

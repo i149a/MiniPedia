@@ -10,6 +10,7 @@ const userController = require('../controllers/userController.js')
 
 
 
+
 // CREATE POST FUNCTION
 const createPost = async (req, res) => {
     try {
@@ -19,7 +20,7 @@ const createPost = async (req, res) => {
         const { title, body, image, tags = [] } = req.body// Current user's ID (Who is writing the post)
         
         let def=image;
-        if(!def){def="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMmyTPv4M5fFPvYLrMzMQcPD_VO34ByNjouQ&s"}
+        // if(!def){def="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMmyTPv4M5fFPvYLrMzMQcPD_VO34ByNjouQ&s"}
       
         // Create new post
         const post = await Post.create({
@@ -73,18 +74,26 @@ const getPostById = async (req, res) => {
     try {
         // Find post and populate all relationships
         const post = await Post.findById(req.params.id)
-            .populate('author', 'username')
+            .populate('author', 'username email')
+            
             .populate('editors', 'username')
             .populate('tags', 'title description')
             
         // Get all available tags for tag selection
         const allTags = await Tag.find({})
-        
+
+        //console.log(post.author)
         // Render single post view with all data
+        
+        const currentUser = req.session.user.email 
+        const postAuthor = post.author.email
+        console.log(currentUser)
+        console.log(postAuthor)
         res.render('./posts/show.ejs', { 
             post,
             allTags,
-            currentUser: req.user
+            currentUser,
+            postAuthor
         })
     } catch (error) {
         console.error('Error getting post:', error.message)

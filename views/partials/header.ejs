@@ -51,16 +51,15 @@
                 <div class="nav-links">
 
                     <% if (user) { %>
-                        <a href="/">Home</a>
-                        <a href="/posts/all">All Posts</a>
-                        <a href="/tags/all">All Tags</a>
+                        <a href="/posts/all">Home</a>
+                        <a href="/users/all">All Users</a>
+                        <a href="/tags/all">Tags</a>
                         <a href="/posts/new">Create New Post</a>
                         <a href="/tags/new">Create New Tag</a>
-                        <a href="/users/<%= user._id %>">Profile</a>
+                        <a href="/users/<%= user._id %>">My Profile</a>
                         <a href="/auth/sign-out">Sign Out</a>
                     <% } else { %>
-                        <a href="/auth/sign-in">Sign In</a>
-                        <a href="/auth/sign-up">Sign Up</a>
+                        <a href="/">Sign In / Sign Up</a>
                     <% } %>
                 </div>
             </div>
