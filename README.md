@@ -62,6 +62,37 @@ You can view our planning and progress on the [MiniPedia Project 2 Trello Board]
 
 ## 🖼️ Screenshots from Browser
 
+### Sign In Page
+![Sign In Page](images/Screenshots/Sign%20in.png)  
+*The login page for existing users.*
+
+### User Profile Page
+![User Profile Page](images/Screenshots/Profile.png)  
+*Profile page showing user info, post history, and tag management.*
+
+### A User Profile Page
+![A User Profile Page](images/Screenshots/A%20User%20Profile.png)  
+*Example of a specific user profile view.*
+
+### All Users Page
+![All Users Page](images/Screenshots/All%20Users.png)  
+*Admin view of all registered users.*
+
+### All Posts Page
+![All Posts Page](images/Screenshots/All%20Posts.png)  
+*List of all posts available on the platform.*
+
+### Show Post Page
+![Show Post Page](images/Screenshots/Show%20Post.png)  
+*Detailed view of a single post.*
+
+### Create New Post Page
+![Create New Post Page](images/Screenshots/Create%20New%20Post.png)  
+*Form for users to create a new post.*
+
+### Create New Tag Page
+![Create New Tag Page](images/Screenshots/Create%20New%20Tag.png)  
+*Form for users to create a new tag.*
 
 ---
 
@@ -88,6 +119,21 @@ Go Live:
 
 5. **Admin Functions** (If applicable)
    - Admins can remove any post and edit user profiles.
+
+---
+
+## 🧰 Used Technologies
+
+- HTML
+- CSS
+- EJS
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- bcrypt
+- express-session
+- Git & GitHub
 
 ---
 
