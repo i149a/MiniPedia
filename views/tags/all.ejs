@@ -1,12 +1,147 @@
 <%- include('../partials/header.ejs') %>
 
-<h2>All Tags</h2>
-<ul>
-    <% tags.forEach(tags => { %>
-        <li>
-            <a href="/tags/<%= tags._id %>"><%= tags.title %></a>
+<div class="tags-page">
+  <div class="tags-header">
+    <h1>Explore Tags</h1>
+    <p class="tags-count"><%= tags.length %> <%= tags.length === 1 ? 'tag' : 'tags' %> available</p>
+  </div>
+
+  <div class="tags-list-container">
+    <ul class="tags-list">
+      <% tags.forEach(tag => { %>
+        <li class="tag-item">
+          <a href="/tags/<%= tag._id %>" class="tag-link">
+            <span class="tag-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 7H7.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="tag-title"><%= tag.title %></span>
+            <span class="tag-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
         </li>
-    <% }) %>
-</ul>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .tags-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .tags-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .tags-header h1 {
+    color: #222;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tags-count {
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .tags-list-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+  }
+
+  .tags-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tag-item {
+    border-bottom: 1px solid #eee;
+    transition: transform 0.2s ease;
+  }
+
+  .tag-item:last-child {
+    border-bottom: none;
+  }
+
+  .tag-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    text-decoration: none;
+    color: inherit;
+    gap: 1rem;
+  }
+
+  .tag-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #f0f7ff;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .tag-title {
+    flex-grow: 1;
+    color: #222;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .tag-arrow {
+    color: #3399ff;
+  }
+
+  .tag-item:hover {
+    transform: translateX(5px);
+  }
+
+  .tag-item:hover .tag-title {
+    color: #3399ff;
+  }
+
+  .tag-item:hover .tag-icon {
+    background-color: #e1f0ff;
+  }
+
+  @media (max-width: 600px) {
+    .tags-page {
+      padding: 0 1rem;
+    }
+    
+    .tags-list-container {
+      padding: 1rem;
+    }
+    
+    .tag-link {
+      padding: 0.75rem 0;
+      gap: 0.75rem;
+    }
+    
+    .tag-icon {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .tag-title {
+      font-size: 1rem;
+    }
+  }
+</style>
 
 <%- include('../partials/footer.ejs') %>

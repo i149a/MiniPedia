@@ -1,12 +1,161 @@
 <%- include('../partials/header.ejs') %>
 
-<h2>All users</h2>
-<ul>
-    <% users.forEach(user => { %>
-        <li>
-            <a href="/users/<%= user._id %>"><%= user.username %></a>
+<div class="users-page">
+  <div class="users-header">
+    <h1>Community Members</h1>
+    <p class="users-count"><%= users.length %> <%= users.length === 1 ? 'member' : 'members' %></p>
+  </div>
+
+  <div class="users-list-container">
+    <ul class="users-list">
+      <% users.forEach(user => { %>
+        <li class="user-item">
+          <a href="/users/<%= user._id %>" class="user-link">
+            <div class="user-avatar">
+              <img src="<%= user.picture || '/images/default-avatar.png' %>" alt="<%= user.username %>" class="avatar-img">
+            </div>
+            <div class="user-details">
+              <h3 class="username"><%= user.username %></h3>
+              <% if (user.bio) { %>
+                <p class="user-bio"><%= user.bio.length > 50 ? user.bio.substring(0, 50) + '...' : user.bio %></p>
+              <% } %>
+            </div>
+            <div class="user-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
         </li>
-    <% }) %>
-</ul>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .users-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .users-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .users-header h1 {
+    color: #222;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .users-count {
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .users-list-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+  }
+
+  .users-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .user-item {
+    border-bottom: 1px solid #eee;
+    transition: transform 0.2s ease;
+  }
+
+  .user-item:last-child {
+    border-bottom: none;
+  }
+
+  .user-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s ease;
+  }
+
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1rem;
+    border: 2px solid #3399ff;
+    flex-shrink: 0;
+  }
+
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .user-details {
+    flex-grow: 1;
+  }
+
+  .username {
+    color: #222;
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+  }
+
+  .user-bio {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .user-arrow {
+    margin-left: 1rem;
+    color: #3399ff;
+  }
+
+  .user-item:hover {
+    transform: translateX(5px);
+  }
+
+  .user-item:hover .username {
+    color: #3399ff;
+  }
+
+  @media (max-width: 600px) {
+    .users-page {
+      padding: 0 1rem;
+    }
+    
+    .users-list-container {
+      padding: 1rem;
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .username {
+      font-size: 1rem;
+    }
+    
+    .user-bio {
+      font-size: 0.8rem;
+    }
+  }
+</style>
 
 <%- include('../partials/footer.ejs') %>

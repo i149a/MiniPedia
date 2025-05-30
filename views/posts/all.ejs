@@ -1,12 +1,156 @@
 <%- include('../partials/header.ejs') %>
 
-<h2>All Posts</h2>
-<ul>
-    <% posts.forEach(posts => { %>
-        <li>
-            <a href="/posts/<%= posts._id %>"><%= posts.title %></a>
+<div class="posts-page">
+  <div class="posts-header">
+    <h1>Community Posts</h1>
+    <p class="posts-count"><%= posts.length %> <%= posts.length === 1 ? 'post' : 'posts' %> available</p>
+  </div>
+
+  <div class="posts-list-container">
+    <ul class="posts-list">
+      <% posts.forEach(post => { %>
+        <li class="post-item">
+          <a href="/posts/<%= post._id %>" class="post-link">
+            <div class="post-content">
+              <h3 class="post-title"><%= post.title %></h3>
+              <% if (post.createdAt) { %>
+                <div class="post-meta">
+                  <span class="post-date">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <%= new Date(post.createdAt).toLocaleDateString() %>
+                  </span>
+                </div>
+              <% } %>
+            </div>
+            <div class="post-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
         </li>
-    <% }) %>
-</ul>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .posts-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .posts-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .posts-header h1 {
+    color: #222;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .posts-count {
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .posts-list-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+  }
+
+  .posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-item {
+    border-bottom: 1px solid #eee;
+    transition: transform 0.2s ease;
+  }
+
+  .post-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-link {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem 0;
+    text-decoration: none;
+    color: inherit;
+    justify-content: space-between;
+  }
+
+  .post-content {
+    flex-grow: 1;
+  }
+
+  .post-title {
+    color: #222;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: #666;
+    font-size: 0.85rem;
+  }
+
+  .post-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .post-arrow {
+    margin-left: 1rem;
+    color: #3399ff;
+  }
+
+  .post-item:hover {
+    transform: translateX(5px);
+  }
+
+  .post-item:hover .post-title {
+    color: #3399ff;
+  }
+
+  @media (max-width: 600px) {
+    .posts-page {
+      padding: 0 1rem;
+    }
+    
+    .posts-list-container {
+      padding: 1rem;
+    }
+    
+    .post-title {
+      font-size: 1rem;
+    }
+    
+    .post-meta {
+      font-size: 0.8rem;
+    }
+    
+    .post-link {
+      padding: 1rem 0;
+    }
+  }
+</style>
 
 <%- include('../partials/footer.ejs') %>

@@ -1,25 +1,271 @@
 <%- include('../partials/header.ejs') %>
 
-<h2>Create New Post</h2>
+<div class="create-post-container">
+  <div class="create-post-card">
+    <h1 class="create-post-title">Create New Post</h1>
+    <p class="create-post-subtitle">Share your thoughts with the community</p>
 
-<form action="/posts" method="POST">
-    <input type="text" name="title" placeholder="Title" required />
-    <textarea name="body" placeholder="Content" required></textarea>
-    <input type="text" name="image" placeholder="Image URL (optional)" />
-  
-    <h3>Select Tags:</h3>
-    <% tags.forEach(tag => { %>
-    <div>
-        <input type="checkbox" name="tags" value="<%= tag._id %>">
-        <label><%= tag.title %></label>
-        <% if (tag.description) { %>
-            <span>(<%= tag.description %>)</span>
-        <% } %>
-    </div>
-    <% }); %>
+    <form action="/posts" method="POST" class="post-form">
+      <div class="form-group">
+        <label for="title">Post Title</label>
+        <input 
+          type="text" 
+          id="title" 
+          name="title" 
+          placeholder="Enter a compelling title" 
+          required 
+          class="form-input"
+        >
+      </div>
 
-    <input type="hidden" name="author" value="<%= user.username %>">
-    <button type="submit">Create Post</button>
-</form>
+      <div class="form-group">
+        <label for="body">Post Content</label>
+        <textarea 
+          id="body" 
+          name="body" 
+          placeholder="Write your post content here..." 
+          required 
+          class="form-textarea"
+          rows="6"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Featured Image (Optional)</label>
+        <input 
+          type="text" 
+          id="image" 
+          name="image" 
+          placeholder="Paste an image URL" 
+          class="form-input"
+        >
+      </div>
+
+      <div class="form-group">
+        <h3 class="tags-heading">Select Tags:</h3>
+        <div class="tags-container">
+          <% tags.forEach(tag => { %>
+            <div class="tag-option">
+              <input 
+                type="checkbox" 
+                id="tag-<%= tag._id %>" 
+                name="tags" 
+                value="<%= tag._id %>"
+                class="tag-checkbox"
+              >
+              <label for="tag-<%= tag._id %>" class="tag-label">
+                <span class="tag-title"><%= tag.title %></span>
+                <% if (tag.description) { %>
+                  <span class="tag-description"><%= tag.description %></span>
+                <% } %>
+              </label>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+
+      <input type="hidden" name="author" value="<%= user.username %>">
+
+      <div class="form-actions">
+        <button type="submit" class="submit-button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16L21 8V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 21V13H7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 3V8H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Publish Post
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .create-post-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .create-post-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+  }
+
+  .create-post-title {
+    color: #222;
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    text-align: center;
+  }
+
+  .create-post-subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  .post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    color: #444;
+    font-size: 0.95rem;
+  }
+
+  .form-input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #3399ff;
+    box-shadow: 0 0 0 3px rgba(51, 153, 255, 0.1);
+  }
+
+  .form-textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 150px;
+    transition: all 0.3s ease;
+  }
+
+  .form-textarea:focus {
+    outline: none;
+    border-color: #3399ff;
+    box-shadow: 0 0 0 3px rgba(51, 153, 255, 0.1);
+  }
+
+  .tags-heading {
+    color: #444;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tag-option {
+    display: flex;
+    align-items: center;
+  }
+
+  .tag-checkbox {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .tag-label {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tag-checkbox:checked + .tag-label {
+    background-color: #e1f0ff;
+    border: 1px solid #3399ff;
+  }
+
+  .tag-checkbox:focus + .tag-label {
+    box-shadow: 0 0 0 3px rgba(51, 153, 255, 0.2);
+  }
+
+  .tag-title {
+    font-weight: 600;
+    color: #222;
+    font-size: 0.9rem;
+  }
+
+  .tag-description {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+  }
+
+  .form-actions {
+    margin-top: 1rem;
+  }
+
+  .submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-button:hover {
+    background-color: #1c6ed0;
+    transform: translateY(-2px);
+  }
+
+  .submit-button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .submit-button:hover svg {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    .create-post-container {
+      padding: 0 1rem;
+    }
+    
+    .create-post-card {
+      padding: 1.5rem;
+    }
+    
+    .create-post-title {
+      font-size: 1.5rem;
+    }
+    
+    .tags-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .submit-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
 
 <%- include('../partials/footer.ejs') %>

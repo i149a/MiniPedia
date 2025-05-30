@@ -1,38 +1,52 @@
 <%- include('../partials/header.ejs') %>
 
-<h2><%= post.title %></h2>
-<% if (post.image) { %>
-    <img src="<%= post.image %>" alt="<%= post.title %>" width="300" />
-<% } %>
-<p><%= post.body %></p>
+<div style="max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <div style="background: white; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 2rem;">
+    <h2 style="color: #222; font-size: 1.8rem; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;"><%= post.title %></h2>
+    
+    <% if (post.image) { %>
+      <div style="text-align: center; margin: 1.5rem 0;">
+        <img src="<%= post.image %>" alt="<%= post.title %>" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+      </div>
+    <% } %>
+    
+    <p style="line-height: 1.6; font-size: 1.1rem; color: #333; margin-bottom: 2rem;"><%= post.body %></p>
 
-<h3>Tags:</h3>
-<ul>
-    <% post.tags.forEach(tag => { %>
-    <li>
-        <a href="/tags/<%= tag._id %>"><%= tag.title %></a>
-        
-    </li>
-    <% }); %>
-</ul>
+    <div style="margin-bottom: 2rem;">
+      <h3 style="color: #444; font-size: 1.2rem; margin-bottom: 0.5rem;">Tags:</h3>
+      <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0;">
+        <% post.tags.forEach(tag => { %>
+        <li style="background: #f0f7ff; padding: 0.5rem 1rem; border-radius: 20px;">
+          <a href="/tags/<%= tag._id %>" style="color: #1c6ed0; text-decoration: none; font-weight: 500;"><%= tag.title %></a>
+        </li>
+        <% }); %>
+      </ul>
+    </div>
 
-<p>Author: <a href="/users/<%= post.author._id %>"><%= post.author.username %></a></p>
-<% if (post.edited) { %>
-    <p>Last edited by: <%= post.editors[post.editors.length-1].username %> - Updated at: <%= post.updatedAt %> </p>
-    <p>Original post: <a href="/posts/<%= post._id %>/OriginalPost"><%= post.title %></a></p>
-<% } %>
+    <p style="color: #666; margin-bottom: 1rem;">Author: <a href="/users/<%= post.author._id %>" style="color: #3399ff; text-decoration: none; font-weight: 500;"><%= post.author.username %></a></p>
+    
+    <% if (post.edited) { %>
+      <div style="background: #f9f9f9; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+        <p style="color: #666; margin: 0.5rem 0; font-size: 0.9rem;">Last edited by: <%= post.editors[post.editors.length-1].username %></p>
+        <p style="color: #666; margin: 0.5rem 0; font-size: 0.9rem;">Updated at: <%= post.updatedAt %></p>
+        <a href="/posts/<%= post._id %>/OriginalPost" style="color: #3399ff; text-decoration: none; font-weight: 500; font-size: 0.9rem;">Original post: <%= post.title %></a>
+      </div>
+    <% } %>
 
-
-<% if ( currentUser == postAuthor) { %>
-    <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete</button>
-    </form>
-<% } %>
-
-<% if ( currentUser ) { %>
-    <form action="/posts/<%= post._id %>/edit" method="GET">
-        <button type="submit">Edit</button>
-    </form>
-<% } %>
+    <div style="display: flex; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+      <% if ( currentUser == postAuthor) { %>
+        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST" style="margin: 0;">
+          <button type="submit" style="padding: 0.75rem 1.5rem; background: #fee2e2; color: #b91c1c; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Delete</button>
+        </form>
+      <% } %>
+      
+      <% if ( currentUser ) { %>
+        <form action="/posts/<%= post._id %>/edit" method="GET" style="margin: 0;">
+          <button type="submit" style="padding: 0.75rem 1.5rem; background: #f0f7ff; color: #3399ff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">Edit</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</div>
 
 <%- include('../partials/footer.ejs') %>

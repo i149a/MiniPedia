@@ -1,18 +1,175 @@
 <%- include('../partials/header.ejs') %>
 
-    <h2><%= user.username %>'s Posts</h2>
+<div class="user-profile-container">
+  <div class="user-header">
+    <h1><%= user.username %>'s Profile</h1>
+  </div>
 
-
-    <ul>
+  <div class="profile-sections">
+    <!-- Posts Section -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16L21 8V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21Z" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <%= user.username %>'s Posts
+          <span class="count-badge"><%= user.posts.length %></span>
+        </h2>
+      </div>
+      
+      <ul class="content-list">
         <% user.posts.forEach(post => { %>
-            <li><a href="/posts/<%= post._id %>"><%= post.title %></a></li>
+          <li class="content-item">
+            <a href="/posts/<%= post._id %>" class="content-link">
+              <span class="content-title"><%= post.title %></span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
         <% }) %>
-    </ul>
-    
-    <h2><%= user.username %>'s Tags</h2>
-    <ul>
+      </ul>
+    </div>
+
+    <!-- Tags Section -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 7H7.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <%= user.username %>'s Tags
+          <span class="count-badge"><%= user.tags.length %></span>
+        </h2>
+      </div>
+      
+      <ul class="content-list">
         <% user.tags.forEach(tag => { %>
-            <li><a href="/tags/<%= tag._id %>"><%= tag.title %></a></li>
+          <li class="content-item">
+            <a href="/tags/<%= tag._id %>" class="content-link">
+              <span class="content-title"><%= tag.title %></span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="#3399ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
         <% }) %>
-    </ul>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .user-profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .user-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .user-header h1 {
+    color: #222;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-sections {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .profile-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .section-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #222;
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  .count-badge {
+    background-color: #3399ff;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .content-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .content-item {
+    border-bottom: 1px solid #f5f5f5;
+    transition: transform 0.2s ease;
+  }
+
+  .content-item:last-child {
+    border-bottom: none;
+  }
+
+  .content-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .content-title {
+    color: #222;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .content-item:hover {
+    transform: translateX(5px);
+  }
+
+  .content-item:hover .content-title {
+    color: #3399ff;
+  }
+
+  @media (max-width: 600px) {
+    .user-profile-container {
+      padding: 0 1rem;
+    }
+    
+    .profile-section {
+      padding: 1.25rem;
+    }
+    
+    .section-header h2 {
+      font-size: 1.1rem;
+    }
+    
+    .content-title {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
 <%- include('../partials/footer.ejs') %>

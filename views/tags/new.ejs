@@ -1,13 +1,176 @@
 <%- include('../partials/header.ejs') %>
 
-<h2>Create New Tag</h2>
+<div class="create-tag-container">
+  <div class="create-tag-card">
+    <h1 class="create-tag-title">Create New Tag</h1>
+    <p class="create-tag-subtitle">Define a new category for content</p>
 
-<form action="/Tags" method="POST">
-    <input type="text" name="title" placeholder="Tag name" required />
-    <textarea name="description" placeholder="Tag description" required></textarea>
+    <form action="/Tags" method="POST" class="tag-form">
+      <div class="form-group">
+        <label for="title">Tag Name</label>
+        <input 
+          type="text" 
+          id="title" 
+          name="title" 
+          placeholder="Enter a unique tag name" 
+          required 
+          class="form-input"
+        >
+      </div>
 
+      <div class="form-group">
+        <label for="description">Tag Description</label>
+        <textarea 
+          id="description" 
+          name="description" 
+          placeholder="Describe what this tag represents..." 
+          required 
+          class="form-textarea"
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 7H7.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Create Tag
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .create-tag-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .create-tag-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+  }
+
+  .create-tag-title {
+    color: #222;
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    text-align: center;
+  }
+
+  .create-tag-subtitle {
+    color: #666;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+
+  .tag-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    color: #444;
+    font-size: 0.95rem;
+  }
+
+  .form-input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #3399ff;
+    box-shadow: 0 0 0 3px rgba(51, 153, 255, 0.1);
+  }
+
+  .form-textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.3s ease;
+  }
+
+  .form-textarea:focus {
+    outline: none;
+    border-color: #3399ff;
+    box-shadow: 0 0 0 3px rgba(51, 153, 255, 0.1);
+  }
+
+  .form-actions {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-button:hover {
+    background-color: #1c6ed0;
+    transform: translateY(-2px);
+  }
+
+  .submit-button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .submit-button:hover svg {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    .create-tag-container {
+      padding: 0 1rem;
+    }
     
-    <button type="submit">Create Tag</button>
-</form>
+    .create-tag-card {
+      padding: 1.5rem;
+    }
+    
+    .create-tag-title {
+      font-size: 1.5rem;
+    }
+    
+    .submit-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
 
 <%- include('../partials/footer.ejs') %>

@@ -1,12 +1,121 @@
 <%- include('../partials/header.ejs') %>
-<h5>This post has been edited by <%= post.editors[post.editors.length-1].username %></h5>
-<h2><%= post.title %></h2>
-<% if (post.image) { %>
-    <img src="<%= post.image %>" alt="<%= post.title %>" width="300" />
-<% } %>
-<p>Original post</p>
-<p><%= post.editedText %></p>
 
+<div class="original-post-container">
+  <div class="original-post-card">
+    <% if (post.edited) { %>
+      <div class="edit-notice">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5L2 22l1.5-5.5L17 3z" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h5>This post has been edited by <%= post.editors[post.editors.length-1].username %></h5>
+      </div>
+    <% } %>
 
+    <h1 class="post-title"><%= post.title %></h1>
+    
+    <% if (post.image) { %>
+      <div class="post-image-wrapper">
+        <img src="<%= post.image %>" alt="<%= post.title %>" class="post-image">
+      </div>
+    <% } %>
+    
+    <div class="original-content">
+      <h3 class="original-label">Original post</h3>
+      <div class="original-text">
+        <%= post.editedText %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .original-post-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .original-post-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+  }
+
+  .edit-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff9e6;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #ffcc00;
+    margin-bottom: 1.5rem;
+  }
+
+  .edit-notice h5 {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .post-title {
+    color: #222;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-image-wrapper {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  .post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .original-content {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+  }
+
+  .original-label {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .original-text {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap;
+  }
+
+  @media (max-width: 600px) {
+    .original-post-container {
+      padding: 0 1rem;
+    }
+    
+    .original-post-card {
+      padding: 1.5rem;
+    }
+    
+    .post-title {
+      font-size: 1.5rem;
+    }
+    
+    .original-text {
+      padding: 1rem;
+    }
+  }
+</style>
 
 <%- include('../partials/footer.ejs') %>
