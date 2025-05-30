@@ -11,13 +11,13 @@ router.post('/:id/update-password', authController.updatePassword);
 router.post('/:id/update-picture', authController.updatePicture);
 
 // GET Sign Up Route
-router.get('/sign-up', (req, res) => {
+router.get('/', (req, res) => {
     res.render('auth/sign-up');
 });
 
 // GET Sign In Route
 router.get('/sign-in', (req, res) => {
-    res.render('auth/sign-in');
+    res.render('posts/all');
 });
 
 // Update Password Route

@@ -46,4 +46,22 @@ router.get('/:id/edit', async (req, res) => {
   })
 })
 
+// Edit Post By ID
+router.get('/:id/OriginalPost', async (req, res) => {
+  const [post, tags] = await Promise.all([
+    Post.findById(req.params.id),
+    Tag.find({}).select('title')
+  ])
+  
+  // Checks is the post can be edited or not
+
+  currentUser = req.session.user
+  res.render('./posts/ShowOriginal.ejs', { 
+    post,
+    tags,
+    currentUser
+
+  })
+})
+
 module.exports = router
