@@ -1,0 +1,12 @@
+<%- include('../partials/header.ejs') %>
+<h5>This post has been edited by <%= post.editors[post.editors.length-1].username %></h5>
+<h2><%= post.title %></h2>
+<% if (post.image) { %>
+    <img src="<%= post.image %>" alt="<%= post.title %>" width="300" />
+<% } %>
+<p>Original post</p>
+<p><%= post.editedText %></p>
+
+
+
+<%- include('../partials/footer.ejs') %>

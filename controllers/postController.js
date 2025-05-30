@@ -113,7 +113,18 @@ const updatePostById = async (req, res) => {
         // Determine which tags were added/removed
         const tagsToAdd = tags.filter(tag => !currentTags.includes(tag))
         const tagsToRemove = currentTags.filter(tag => !tags.includes(tag))
-        
+        console.log(tagsToAdd)
+
+        //Check if original post or edited before:
+        if(!currentPost.edited){
+        const post = await Post.findByIdAndUpdate(
+        req.params.id,
+        {editedText:currentPost.body
+        },
+        { new: true } // Return the updated document
+        )
+    }
+         
         // Update the post
         const post = await Post.findByIdAndUpdate(
             req.params.id,

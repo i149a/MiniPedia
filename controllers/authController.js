@@ -12,19 +12,19 @@ const registerUser = async (req, res) => {
     try {
         const userInDatabase = await User.findOne({ email: req.body.email });
         if (userInDatabase) {
-            return res.status(400).render('auth/sign-up', { 
+            return res.status(400).render('index', { 
                 error: 'Email already registered!' 
             });
         }
 
         if (!validatePassword(req.body.password)) {
-            return res.status(400).render('auth/sign-up', {
+            return res.status(400).render('index', {
                 error: 'Password must be 8+ chars with uppercase, lowercase, and number'
             });
         }
 
         if (req.body.password !== req.body.confirmPassword) {
-            return res.status(400).render('auth/sign-up', {
+            return res.status(400).render('index', {
                 error: 'Passwords do not match'
             });
         }
@@ -55,7 +55,7 @@ const registerUser = async (req, res) => {
         res.redirect(`/users/${user._id}`);
     } catch (error) {
         console.error('Registration error:', error.message);
-        res.status(500).render('auth/sign-up', {
+        res.status(500).render('/', {
             error: 'Registration failed. Please try again.'
         });
     }
@@ -66,7 +66,7 @@ const signInUser = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
-            return res.status(400).render('auth/sign-in', {
+            return res.status(400).redirect('/', {
                 error: 'No user found with that email'
             });
         }
@@ -76,7 +76,7 @@ const signInUser = async (req, res) => {
             user.password
         );
         if (!validPassword) {
-            return res.status(400).render('auth/sign-in', {
+            return res.status(400).redirect('/', {
                 error: 'Incorrect password'
             });
         }
@@ -86,10 +86,10 @@ const signInUser = async (req, res) => {
             _id: user._id
         };
 
-        res.redirect(`/users/${user._id}`);
+        res.redirect(`/posts/all`);
     } catch (error) {
         console.error('Sign in error:', error.message);
-        res.status(500).render('auth/sign-in', {
+        res.status(500).render('index', {
             error: 'Sign in failed. Please try again.'
         });
     }
@@ -111,7 +111,7 @@ const updatePassword = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            return res.status(404).render('auth/update-password', {
+            return res.status(404).render('auth/forget-password', {
                 error: 'User not found',
                 user: null
             });
@@ -225,21 +225,21 @@ const forgetPassword = async (req, res) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).render('auth/reset-password', {
+            return res.status(404).render('auth/forget-password', {
                 error: 'No user found with that email',
                 email
             });
         }
 
         if (!validatePassword(newPassword)) {
-            return res.status(400).render('auth/reset-password', {
+            return res.status(400).render('auth/forget-password', {
                 error: 'Password must be 8+ chars with uppercase, lowercase, and number',
                 email
             });
         }  
 
         if (newPassword !== confirmPassword) {
-            return res.status(400).render('auth/reset-password', {
+            return res.status(400).render('auth/forget-password', {
                 error: 'Passwords do not match',
                 email
             });
@@ -247,7 +247,7 @@ const forgetPassword = async (req, res) => {
 
         const isSameAsOld = await bcrypt.compare(newPassword, user.password);
         if (isSameAsOld) {
-            return res.status(400).render('auth/reset-password', {
+            return res.status(400).render('auth/forget-password', {
                 error: 'New password must be different from the old password',
                 email
             });
@@ -260,7 +260,7 @@ const forgetPassword = async (req, res) => {
         res.redirect('/');
     } catch (error) {
         console.error('Password reset error:', error.message);
-        res.status(500).render('auth/reset-password', {
+        res.status(500).render('auth/forget-password', {
             error: 'Failed to reset password. Please try again.',
             email: req.body.email
         });

@@ -18,7 +18,8 @@
 
 <p>Author: <a href="/users/<%= post.author._id %>"><%= post.author.username %></a></p>
 <% if (post.edited) { %>
-    <p>Last edited by: <%= post.editors[post.editors.length-1].username %></p>
+    <p>Last edited by: <%= post.editors[post.editors.length-1].username %> - Updated at: <%= post.updatedAt %> </p>
+    <p>Original post: <a href="/posts/<%= post._id %>/OriginalPost"><%= post.title %></a></p>
 <% } %>
 
 
