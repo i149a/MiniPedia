@@ -99,7 +99,7 @@ You can view our planning and progress on the [MiniPedia Project 2 Trello Board]
 ## 🚀 Getting Started
 
 ### 🔗 Browse It Live
-Go Live: 
+Go Live: [Deployed Link](https://minipedia.onrender.com)
 
 ### 🧭 How to Go Through It
 1. **Sign Up / Sign In**  
